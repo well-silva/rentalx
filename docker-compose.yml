@@ -17,7 +17,6 @@ services:
   app:
     build: .
     container_name: rentalx
-    restart: always
     ports:
       - 3000:3000
     volumes:
