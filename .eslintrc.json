@@ -57,7 +57,7 @@
         "newlinesBetween": "always",
         "groups": [
           "module",
-          "/^@shared/",
+          "/^@/",
           [
             "parent",
             "sibling",
@@ -73,9 +73,7 @@
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": [
-          "**/*.spec.js"
-        ]
+        "devDependencies": ["**/*.spec.ts", "jest.config.ts"]
       }
     ],
     "prettier/prettier": "error"
