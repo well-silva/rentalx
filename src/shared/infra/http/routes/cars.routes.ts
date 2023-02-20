@@ -1,13 +1,13 @@
-import { Router } from "express";
-import multer from "multer";
+import { Router } from 'express';
+import multer from 'multer';
 
-import uploadConfig from "@config/upload";
-import { CreateCarController } from "@modules/cars/useCases/createCar/CreateCarController";
-import { CreateCarSpeficationController } from "@modules/cars/useCases/createCarSpeficication/CreateCarsSpeficationController";
-import { ListAvailableCarsController } from "@modules/cars/useCases/listAvailableCars/listAvailableCarsController";
-import { UploadCarImagesController } from "@modules/cars/useCases/uploadCarImages/UploadCarImagesController";
-import { ensureAdmin } from "@shared/infra/http//middlewares/ensureAdmin";
-import { ensureAuthenticated } from "@shared/infra/http/middlewares/ensureAuthenticated";
+import uploadConfig from '@config/upload';
+import { CreateCarController } from '@modules/cars/useCases/createCar/CreateCarController';
+import { CreateCarSpeficationController } from '@modules/cars/useCases/createCarSpeficication/CreateCarsSpeficationController';
+import { ListAvailableCarsController } from '@modules/cars/useCases/listAvailableCars/listAvailableCarsController';
+import { UploadCarImagesController } from '@modules/cars/useCases/uploadCarImages/UploadCarImagesController';
+import { ensureAdmin } from '@shared/infra/http//middlewares/ensureAdmin';
+import { ensureAuthenticated } from '@shared/infra/http/middlewares/ensureAuthenticated';
 
 const carsRoutes = Router();
 
@@ -16,24 +16,24 @@ const listAvailableCarsController = new ListAvailableCarsController();
 const createCarSpeficationController = new CreateCarSpeficationController();
 const uploadCarImagesController = new UploadCarImagesController();
 
-const upload = multer(uploadConfig.upload("./tmp/cars"));
+const upload = multer(uploadConfig.upload('./tmp/cars'));
 
-carsRoutes.post("/", ensureAuthenticated, ensureAdmin, createCarController.handle);
+carsRoutes.post('/', ensureAuthenticated, ensureAdmin, createCarController.handle);
 
-carsRoutes.get("/available", listAvailableCarsController.handle);
+carsRoutes.get('/available', listAvailableCarsController.handle);
 
 carsRoutes.post(
-  "/specifications/:id",
+  '/specifications/:id',
   ensureAuthenticated,
   ensureAdmin,
   createCarSpeficationController.handle
 );
 
 carsRoutes.post(
-  "/images/:id",
+  '/images/:id',
   ensureAuthenticated,
   ensureAdmin,
-  upload.array("images"),
+  upload.array('images'),
   uploadCarImagesController.handle
 );
 
