@@ -1,7 +1,7 @@
-import { ICreateCarDTO } from "@modules/cars/dtos/ICreateCarDTO";
-import { Car } from "@modules/cars/infra/typeorm/entities/Car";
+import { ICreateCarDTO } from '@modules/cars/dtos/ICreateCarDTO';
+import { Car } from '@modules/cars/infra/typeorm/entities/Car';
 
-import { ICarsRepository } from "../ICarsRepository";
+import { ICarsRepository } from '../ICarsRepository';
 
 class CarsRepositoryInMemory implements ICarsRepository {
   cars: Car[] = [];
@@ -59,6 +59,12 @@ class CarsRepositoryInMemory implements ICarsRepository {
     const car = this.cars.find((car) => car.id === id);
 
     return car;
+  }
+
+  async updateAvailable(id: string, available: boolean): Promise<void> {
+    const findIndex = this.cars.findIndex((car) => car.id === id);
+
+    this.cars[findIndex].available = available;
   }
 }
 
